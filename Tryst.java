@@ -24,7 +24,7 @@ public class Tryst {
 
         String source = "";
         while(sc.hasNextLine()) {
-            source += sc.nextLine();
+            source += sc.nextLine() + "\n";
         }
         TokenString tokens = Tokenizer.tokenize(source);
         System.out.println("#" + tokens.toString());
@@ -38,20 +38,6 @@ public class Tryst {
         }
         assembly.exit();
         System.out.println(assembly);
-
-        // while(sc.hasNextLine()) {
-        //     String line = sc.nextLine();
-        //     TokenString tokens = Tokenizer.tokenize(line);
-        //     System.out.println("# " + tokens.toString());
-        //     Statement stmt = Statement.getStatement(tokens);
-        //     if(stmt == null) {
-        //         System.out.println("null");
-        //     } else {
-        //         stmt.assemble(assembly);
-        //     }
-        // }
-        // assembly.exit();
-        // System.out.println(assembly);
         
     }
 

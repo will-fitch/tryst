@@ -1,6 +1,7 @@
 bln x: true;
 bln y: false;
 int z: 2;
+print(x);`[`
 if(x or y)
-    print(z);
+    print(z);`]`
 print(3);
