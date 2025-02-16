@@ -28,6 +28,7 @@ public class Tryst {
         }
         TokenString tokens = Tokenizer.tokenize(source);
         System.out.println("#" + tokens.toString());
+        global.open(assembly);
         while(tokens.hasNext()) {
             Statement stmt = Statement.getStatement(tokens);
             if(stmt == null) {

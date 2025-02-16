@@ -32,8 +32,16 @@ public class Assembly {
         instructions.add("sw " + register + " 4(sp)");
     }
 
+    public void load(String toRegister, String addressRegister, int offset) {
+        instructions.add("lw " + toRegister + " " + offset + "(" + addressRegister + ")");
+    }
+
+    public void save(String fromRegister, String addressRegister, int offset) {
+        instructions.add("sw " + fromRegister + " " + offset + "(" + addressRegister + ")");
+    }
+
     public void moveValue(String fromRegister, String toRegister) {
-        instructions.add("mv " + fromRegister + " " + toRegister);
+        instructions.add("mv " + toRegister + " " + fromRegister);
     }
 
     public void exit() {

@@ -201,7 +201,8 @@ public abstract class Statement {
         public void assemble(Assembly assembly) {
             Tryst.global.declare(ident, "BLN", expr);
             expr.assemble(assembly);
-            assembly.popTo(Tryst.global.register(ident));
+            assembly.popTo("t5");
+            Tryst.global.saveFrom(assembly, ident, "t5");
         }
 
     }
@@ -226,7 +227,8 @@ public abstract class Statement {
         public void assemble(Assembly assembly) {
             Tryst.global.declare(ident, "INT", expr);
             expr.assemble(assembly);
-            assembly.popTo(Tryst.global.register(ident));
+            assembly.popTo("t5");
+            Tryst.global.saveFrom(assembly, ident, "t5");
         }
 
     }
@@ -250,7 +252,8 @@ public abstract class Statement {
         @Override
         public void assemble(Assembly assembly) {
             expr.assemble(assembly);
-            assembly.popTo(Tryst.global.register(ident));
+            assembly.popTo("t5");
+            Tryst.global.saveFrom(assembly, ident, "t5");
         }
 
     }
@@ -274,7 +277,8 @@ public abstract class Statement {
         @Override
         public void assemble(Assembly assembly) {
             expr.assemble(assembly);
-            assembly.popTo(Tryst.global.register(ident));
+            assembly.popTo("t5");
+            Tryst.global.saveFrom(assembly, ident, "t5");
         }
 
     }

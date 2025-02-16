@@ -134,7 +134,8 @@ class IntVar extends IntExpr {
     }
 
     public void assemble(Assembly assembly) {
-        assembly.pushFrom(Tryst.global.register(ident));
+        Tryst.global.loadTo(assembly, ident, "t5");
+        assembly.pushFrom("t5");
     }
 }
 

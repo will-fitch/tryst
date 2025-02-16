@@ -6,11 +6,9 @@ import tokens.Token;
 public class Scope {
 
     private final Map<String, Var> variables;
-    private int registerIndex;
 
     public Scope() {
         variables = new HashMap<>();
-        registerIndex = 0;
     }
 
     public Token.Type getType(String ident) {
@@ -22,9 +20,19 @@ public class Scope {
         return null;
     }
 
-    public String register(String ident) {
-        if(!variables.containsKey(ident)) return null;
-        return variables.get(ident).register;
+    public void loadTo(Assembly assembly, String ident, String register) {
+        if(!variables.containsKey(ident)) return;
+        assembly.load(register, "s0", variables.get(ident).offset);
+    }
+
+    public void saveFrom(Assembly assembly, String ident, String register) {
+        if(!variables.containsKey(ident)) return;
+        assembly.save(register, "s0", variables.get(ident).offset);
+    }
+
+    public void open(Assembly assembly) {
+        assembly.moveValue("sp", "s0");
+        assembly.append("addi sp sp " + (-4*variables.size()));
     }
 
     public Expr getExpr(String ident) {
@@ -33,9 +41,7 @@ public class Scope {
     }
 
     public void declare(String ident, String type, Expr expr) {
-        if(registerIndex > 4) System.err.println("WARNING: TOO MANY VARIABLE DECLARATIONS!");
-        variables.put(ident, new Var(type, expr, "t"+registerIndex));
-        registerIndex++;
+        variables.put(ident, new Var(type, expr, 4*(variables.size()+1)));
     }
 
 }
@@ -44,12 +50,12 @@ class Var {
 
     public final String type;
     public final Expr expr;
-    public final String register;
+    public final int offset;
 
-    public Var(String type, Expr expr, String register) {
+    public Var(String type, Expr expr, int offset) {
         this.type = type;
         this.expr = expr;
-        this.register = register;
+        this.offset = offset;
     }
 
 }

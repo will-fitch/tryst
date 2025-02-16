@@ -1,7 +1,2 @@
-bln x: true;
-bln y: false;
-int z: 2;
-print(x);`[`
-if(x or y)
-    print(z);`]`
-print(3);
+int var1: 6;
+print(8-var1);
